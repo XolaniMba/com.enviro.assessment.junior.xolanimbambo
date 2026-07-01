@@ -1,4 +1,4 @@
-package main.java.com.enviro.assessment.repository;
+package com.enviro.assessment.repository;
 
 public class InvestorRepository {
     

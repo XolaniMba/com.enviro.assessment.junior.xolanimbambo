@@ -1,4 +1,4 @@
-package main.java.com.enviro.assessment.DTO;
+package com.enviro.assessment.DTO;
 
 public class ErrorResponse {
     

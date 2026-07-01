@@ -1,4 +1,4 @@
-package main.java.com.enviro.assessment.controller;
+package com.enviro.assessment.controller;
 
 public class InvestorController {
     
