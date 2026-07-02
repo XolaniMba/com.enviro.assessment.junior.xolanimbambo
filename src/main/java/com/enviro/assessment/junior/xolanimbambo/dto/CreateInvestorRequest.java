@@ -1,15 +1,42 @@
 package com.enviro.assessment.junior.xolanimbambo.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+
+import java.time.LocalDate;
+
 public class CreateInvestorRequest {
 
+    @NotBlank(message = "firstName is required")
     private String firstName;
-    private String lastName;
-    private int age;
-    private String investmentType;
-    private double balance;
-    private String currency;
 
-    public CreateInvestorRequest() {}
+    @NotBlank(message = "lastName is required")
+    private String lastName;
+
+    @NotBlank(message = "idNumber is required")
+    private String idNumber;
+
+    @NotBlank(message = "email is required")
+    @Email(message = "email must be a valid email address")
+    private String email;
+
+    @NotNull(message = "dateOfBirth is required")
+    @Past(message = "dateOfBirth must be in the past")
+    private LocalDate dateOfBirth;
+
+    public CreateInvestorRequest() {
+    }
+
+    public CreateInvestorRequest(String firstName, String lastName, String idNumber,
+                                  String email, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.idNumber = idNumber;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -27,35 +54,27 @@ public class CreateInvestorRequest {
         this.lastName = lastName;
     }
 
-    public int getAge() {
-        return age;
+    public String getIdNumber() {
+        return idNumber;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 
-    public String getInvestmentType() {
-        return investmentType;
+    public String getEmail() {
+        return email;
     }
 
-    public void setInvestmentType(String investmentType) {
-        this.investmentType = investmentType;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public double getBalance() {
-        return balance;
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
