@@ -1,6 +1,8 @@
 package com.enviro.assessment.junior.xolanimbambo.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,13 +13,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Centralised exception handling for the whole API. Every exception type is
- * translated into a consistent ApiError JSON body with an appropriate HTTP
- * status, instead of leaking stack traces or default Spring error pages.
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(InvestorNotFoundException.class)
     public ResponseEntity<ApiError> handleInvestorNotFound(InvestorNotFoundException ex, HttpServletRequest request) {
@@ -54,6 +53,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiError> handleGeneric(Exception ex, HttpServletRequest request) {
+        // Log the FULL exception with stack trace so it's visible in the console,
+            // while still returning a safe, generic message to the client.
+        logger.error("Unhandled exception at {}: {}", request.getRequestURI(), ex.getMessage(), ex);
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 "An unexpected error occurred. Please try again later.", request, null);
     }
