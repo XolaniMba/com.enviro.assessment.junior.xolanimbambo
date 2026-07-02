@@ -6,3 +6,7 @@ INSERT INTO investment_products (id, account_number, product_type, balance, inve
   (1, 'RA-0001-001', 'RETIREMENT_ANNUITY', 850000.00, 1),
   (2, 'DI-0001-002', 'DISCRETIONARY_INVESTMENT', 120000.00, 1),
   (3, 'DI-0002-001', 'DISCRETIONARY_INVESTMENT', 45000.00, 2);
+
+ALTER TABLE investors ALTER COLUMN id RESTART WITH 3;
+ALTER TABLE investment_products ALTER COLUMN id RESTART WITH 4;
+ALTER TABLE withdrawal_notices ALTER COLUMN id RESTART WITH 3;
